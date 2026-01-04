@@ -25,6 +25,11 @@ class GildedRose(object):
                     item.quality = item.quality + 1
                 if item.sell_in < 0:
                     item.quality = 0
+            elif item.name == "Conjured Mana Cake":
+                item.sell_in = item.sell_in - 1
+                item.quality = max(item.quality -2 , 0)
+                if item.sell_in < 0:
+                    item.quality = max(item.quality -2 , 0)
             else:
                 item.sell_in = item.sell_in - 1
                 if item.quality > 0:
