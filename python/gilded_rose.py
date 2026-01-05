@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from item import Item
-
 
 class GildedRose(object):
 
