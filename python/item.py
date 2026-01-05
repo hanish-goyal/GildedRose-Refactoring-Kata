@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from item_helper import increase_quality, decrease_quality
+from item_quality_update import increase_quality, decrease_quality
 
 
 class Item(ABC):
