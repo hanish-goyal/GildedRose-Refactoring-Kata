@@ -17,8 +17,8 @@ class Item:
             if item.name == ItemNameMappings.AGED_BRIE:
                 item.sell_in = item.sell_in - 1
                 if item.sell_in < 0:
-                    item.quality =  increase_quality(item.quality, 1)
-                item.quality = increase_quality(item.quality, 1)
+                    item.quality =  increase_quality(item.quality)
+                item.quality = increase_quality(item.quality)
 
             elif item.name == ItemNameMappings.SULFURAS:
                 pass
@@ -32,7 +32,7 @@ class Item:
                 elif item.sell_in < 10:
                     item.quality = increase_quality(item.quality, 2)
                 else:
-                    item.quality = increase_quality(item.quality, 1)
+                    item.quality = increase_quality(item.quality)
 
             elif item.name == ItemNameMappings.CONJURED:
                 item.sell_in = item.sell_in - 1
@@ -43,5 +43,5 @@ class Item:
             else:
                 item.sell_in = item.sell_in - 1
                 if item.sell_in < 0:
-                    item.quality = decrease_quality(item.quality, 1)
-                item.quality = decrease_quality(item.quality, 1)
+                    item.quality = decrease_quality(item.quality)
+                item.quality = decrease_quality(item.quality)
