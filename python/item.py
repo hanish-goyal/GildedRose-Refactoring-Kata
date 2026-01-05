@@ -1,4 +1,6 @@
 from item_constants import ItemNameMappings
+from item_helper import increase_quality, decrease_quality
+
 
 class Item:
     def __init__(self, name, sell_in, quality):
@@ -15,8 +17,8 @@ class Item:
             if item.name == ItemNameMappings.AGED_BRIE:
                 item.sell_in = item.sell_in - 1
                 if item.sell_in < 0:
-                    item.quality = min(item.quality + 1 , 50)
-                item.quality = min(item.quality + 1, 50)
+                    item.quality =  increase_quality(item.quality, 1)
+                item.quality = increase_quality(item.quality, 1)
 
             elif item.name == ItemNameMappings.SULFURAS:
                 pass
@@ -26,20 +28,20 @@ class Item:
                 if item.sell_in < 0:
                     item.quality = 0
                 elif item.sell_in < 5:
-                    item.quality = min(item.quality + 3,  50)
+                    item.quality = increase_quality(item.quality, 3)
                 elif item.sell_in < 10:
-                    item.quality = min(item.quality + 2,  50)
+                    item.quality = increase_quality(item.quality, 2)
                 else:
-                    item.quality = min(item.quality + 1, 50)
+                    item.quality = increase_quality(item.quality, 1)
 
             elif item.name == ItemNameMappings.CONJURED:
                 item.sell_in = item.sell_in - 1
-                item.quality = max(item.quality -2 , 0)
+                item.quality = decrease_quality(item.quality, 2)
                 if item.sell_in < 0:
-                    item.quality = max(item.quality -2 , 0)
+                    item.quality = decrease_quality(item.quality, 2)
 
             else:
                 item.sell_in = item.sell_in - 1
                 if item.sell_in < 0:
-                    item.quality = max(item.quality - 1, 0)
-                item.quality = max(item.quality - 1, 0)
+                    item.quality = decrease_quality(item.quality, 1)
+                item.quality = decrease_quality(item.quality, 1)
