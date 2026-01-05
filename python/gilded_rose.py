@@ -8,4 +8,5 @@ class GildedRose(object):
         self.items = items
 
     def update_quality(self):
-        Item.update_quality(self.items)
+        for item in self.items:
+            item.update_quality()

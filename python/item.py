@@ -1,8 +1,8 @@
-from item_constants import ItemNameMappings
+from abc import ABC, abstractmethod
 from item_helper import increase_quality, decrease_quality
 
 
-class Item:
+class Item(ABC):
     def __init__(self, name, sell_in, quality):
         self.name = name
         self.sell_in = sell_in
@@ -11,37 +11,48 @@ class Item:
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
-    @staticmethod
-    def update_quality(items):
-        for item in items:
-            if item.name == ItemNameMappings.AGED_BRIE:
-                item.sell_in = item.sell_in - 1
-                if item.sell_in < 0:
-                    item.quality =  increase_quality(item.quality)
-                item.quality = increase_quality(item.quality)
+    @abstractmethod
+    def update_quality(self):
+        pass
 
-            elif item.name == ItemNameMappings.SULFURAS:
-                pass
 
-            elif item.name == ItemNameMappings.BACKSTAGE:
-                item.sell_in = item.sell_in - 1
-                if item.sell_in < 0:
-                    item.quality = 0
-                elif item.sell_in < 5:
-                    item.quality = increase_quality(item.quality, 3)
-                elif item.sell_in < 10:
-                    item.quality = increase_quality(item.quality, 2)
-                else:
-                    item.quality = increase_quality(item.quality)
+class AgedBrieItem(Item):
+    def update_quality(self):
+        self.sell_in = self.sell_in - 1
+        if self.sell_in < 0:
+            self.quality = increase_quality(self.quality)
+        self.quality = increase_quality(self.quality)
 
-            elif item.name == ItemNameMappings.CONJURED:
-                item.sell_in = item.sell_in - 1
-                item.quality = decrease_quality(item.quality, 2)
-                if item.sell_in < 0:
-                    item.quality = decrease_quality(item.quality, 2)
 
-            else:
-                item.sell_in = item.sell_in - 1
-                if item.sell_in < 0:
-                    item.quality = decrease_quality(item.quality)
-                item.quality = decrease_quality(item.quality)
+class SulfurasItem(Item):
+    def update_quality(self):
+        pass
+
+
+class BackstageItem(Item):
+    def update_quality(self):
+        self.sell_in = self.sell_in - 1
+        if self.sell_in < 0:
+            self.quality = 0
+        elif self.sell_in < 5:
+            self.quality = increase_quality(self.quality, 3)
+        elif self.sell_in < 10:
+            self.quality = increase_quality(self.quality, 2)
+        else:
+            self.quality = increase_quality(self.quality)
+
+
+class ConjuredItem(Item):
+    def update_quality(self):
+        self.sell_in = self.sell_in - 1
+        self.quality = decrease_quality(self.quality, 2)
+        if self.sell_in < 0:
+            self.quality = decrease_quality(self.quality, 2)
+
+
+class GeneralItem(Item):
+    def update_quality(self):
+        self.sell_in = self.sell_in - 1
+        if self.sell_in < 0:
+            self.quality = decrease_quality(self.quality)
+        self.quality = decrease_quality(self.quality)
