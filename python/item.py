@@ -1,3 +1,5 @@
+from item_constants import ItemNameMappings
+
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
@@ -10,16 +12,16 @@ class Item:
     @staticmethod
     def update_quality(items):
         for item in items:
-            if item.name == "Aged Brie":
+            if item.name == ItemNameMappings.AGED_BRIE:
                 item.sell_in = item.sell_in - 1
                 if item.sell_in < 0:
                     item.quality = min(item.quality + 1 , 50)
                 item.quality = min(item.quality + 1, 50)
 
-            elif item.name == "Sulfuras, Hand of Ragnaros":
+            elif item.name == ItemNameMappings.SULFURAS:
                 pass
 
-            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+            elif item.name == ItemNameMappings.BACKSTAGE:
                 item.sell_in = item.sell_in - 1
                 if item.sell_in < 0:
                     item.quality = 0
@@ -30,7 +32,7 @@ class Item:
                 else:
                     item.quality = min(item.quality + 1, 50)
 
-            elif item.name == "Conjured Mana Cake":
+            elif item.name == ItemNameMappings.CONJURED:
                 item.sell_in = item.sell_in - 1
                 item.quality = max(item.quality -2 , 0)
                 if item.sell_in < 0:
